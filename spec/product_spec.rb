@@ -15,6 +15,12 @@ RSpec.describe Product do
       }.to raise_error(ArgumentError)
   end
 
+    it "returns argument error when price not provided" do
+    expect {
+      Product.new(name: "Product")
+      }.to raise_error(ArgumentError)
+  end
+
   it "creates products with incremental IDs" do
     last_id = Product.new(name: "Product1", price: 55).id
     expect(Product.new(name: "Product2", price: 100).id).to eq(last_id + 1)
