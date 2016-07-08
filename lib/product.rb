@@ -6,7 +6,10 @@ class Product
   def initialize(name:, price:)
     @id = next_id
     @name = name
-    @price = price
+    @price = price.to_f
+    raise ArgumentError unless price.is_a?(Numeric)
+    raise ArgumentError unless price > 0
+    raise ArgumentError unless name.is_a?(String)
   end
 
   private
