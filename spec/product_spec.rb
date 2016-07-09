@@ -6,31 +6,31 @@ RSpec.describe Product do
     it "returns argument error when name not provided" do
       expect {
         Product.new(price: 100)
-        }.to raise_error(ArgumentError)
+      }.to raise_error(ArgumentError)
     end
 
     it "returns argument error when price not provided" do
       expect {
         Product.new(name: "Product")
-        }.to raise_error(ArgumentError)
+      }.to raise_error(ArgumentError)
     end
 
     it "returns argument error when price is not a number" do
       expect {
         Product.new(name: "Product", price: "1")
-        }.to raise_error(ArgumentError)      
+      }.to raise_error(ArgumentError)      
     end
 
     it "returns argument error when name is not a string" do
       expect {
         Product.new(name: 1, price: 100)
-        }.to raise_error(ArgumentError)      
+      }.to raise_error(ArgumentError)      
     end
 
     it "returns argument error when price is not a positive number" do
       expect {
         Product.new(name: "Product", price: -1)
-        }.to raise_error(ArgumentError)      
+      }.to raise_error(ArgumentError)      
     end
 
     it "creates products with incremental IDs" do

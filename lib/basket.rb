@@ -1,5 +1,6 @@
 class Basket
   attr_reader :products
+  
   ProductNotFound = Class.new(StandardError)
 
   def initialize(products = [])
@@ -22,10 +23,10 @@ class Basket
   end
 
   def sum
-    (products.
-    map(&:price).
-    reduce(0, :+)).
-    round(2)    
+    products
+      .map(&:price)
+      .reduce(0, :+)
+      .round(2)    
   end
 
   def sum_with_vat
