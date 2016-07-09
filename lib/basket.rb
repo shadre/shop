@@ -15,11 +15,8 @@ class Basket
 
   def delete(product_id)
     product_in_basket = products.find { |prod| prod.id == product_id }
-    if product_in_basket
-      products.delete(product_in_basket)
-    else
-      raise ProductNotFound
-    end
+    raise ProductNotFound unless product_in_basket
+    products.delete(product_in_basket)
   end
 
   def sum
@@ -35,7 +32,7 @@ class Basket
 
   def show 
     products.each do |prod|
-    puts "Product: #{prod.name}, ID: #{prod.id}, price: #{prod.price} \t"
+      puts "Product: #{prod.name}, ID: #{prod.id}, price: #{prod.price} \t"
     end
     puts "----------------------------"
     print "Total SUM: " 
