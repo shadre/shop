@@ -1,43 +1,44 @@
 class Basket
-  attr_reader :products
-  
+  attr_reader :name, :price, :id, :product
+  attr_accessor :items
+
   ProductNotFound = Class.new(StandardError)
 
-  def initialize(products = [])
-    @products = products
+  def initialize(items = [])
+    @items = items
   end
 
-# later: def add(product, quantity=1)
-  def add(product)
-    products << product
-    #add warehouse quantity -= 1 later on
+  def add(basket_item)
+    items << basket_item
   end
 
-  def delete(product_id)
-    product_in_basket = products.find { |prod| prod.id == product_id }
-    raise ProductNotFound unless product_in_basket
-    products.delete(product_in_basket)
+  def remove(product_id)
+    existing_basket_item = items.find { |item| item.product.id == product_id }
+    raise ProductNotFound unless existing_basket_item
+    items.delete(existing_basket_item)
+  end
+
+  def summary
+    items.
+      reject { |item| item.quantity.zero? }.
+      map do |item|
+        { name: item.product.name,
+          id: item.product.id,
+          unit_price: item.product.price,
+          qty: item.quantity,
+          price: (item.product.price * item.quantity) }
+      end
   end
 
   def sum
-    products
-      .map(&:price)
-      .reduce(0, :+)
-      .round(2)    
+    sum = 0
+    summary.each do |prod|
+      sum += prod[:price]
+    end
+    sum.round(2)
   end
 
   def sum_with_vat
     (sum * 1.23).round(2)
-  end
-
-  def show 
-    products.each do |prod|
-      puts "Product: #{prod.name}, ID: #{prod.id}, price: #{prod.price} \t"
-    end
-    puts "----------------------------"
-    print "Total SUM: " 
-    puts sum
-    print "With VAT: " 
-    puts sum_with_vat
   end
 end
