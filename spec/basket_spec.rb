@@ -1,13 +1,12 @@
 require_relative '../lib/basket.rb'
 
 RSpec.describe Basket do
-
   let(:football) { Product.new(name: "Football", price: 79) }
   let(:basketball) { Product.new(name: "Basketball", price: 60) }
   let(:tennis_ball) { Product.new(name: "Tennis ball", price: 10) }
-  let(:footballs_in_basket) { BasketItem.new(product: football, quantity: 2)}
-  let(:basketballs_in_basket) { BasketItem.new(product: basketball, quantity: 1)}
-  let(:tennis_balls_in_basket) { BasketItem.new(product: tennis_ball, quantity: 3)}
+  let(:footballs_in_basket) { BasketItem.new(product: football, quantity: 2) }
+  let(:basketballs_in_basket) { BasketItem.new(product: basketball, quantity: 1) }
+  let(:tennis_balls_in_basket) { BasketItem.new(product: tennis_ball, quantity: 3) }
   let(:basket) { Basket.new([footballs_in_basket, basketballs_in_basket]) }
 
   describe "#sum" do
@@ -25,10 +24,13 @@ RSpec.describe Basket do
   describe "#add" do
     it "adds selected item to basket" do
       basket.add(tennis_balls_in_basket)
-        products_in_basket_names = basket.items.map do |item|
-         { name: item.product.name }
-        end
-      expect(products_in_basket_names.select { |prod| prod[:name] == "Tennis ball" }.empty?).to eq(false)
+      products_in_basket_names = basket.items.map do |item|
+        { name: item.product.name }
+      end
+      tennis_balls_found_in_basket = products_in_basket_names.select do |prod|
+        prod[:name] == "Tennis ball"
+      end
+      expect(tennis_balls_found_in_basket.empty?).to eq(false)
     end
   end
 
