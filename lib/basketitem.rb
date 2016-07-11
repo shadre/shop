@@ -17,8 +17,8 @@ class BasketItem
     raise ArgumentError unless num.is_a?(Integer)
 
     if @quantity + num >= 0
-    # it's OK to set @quantity = 0 here, because Basket#summary method rejects such items
-      @quantity = @quantity + num
+      # it's OK to set @quantity = 0 here, because Basket#summary method rejects such items
+      @quantity += num
     else
       raise WrongQuantityRequested
     end
