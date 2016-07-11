@@ -31,11 +31,10 @@ class Basket
   end
 
   def sum
-    sum = 0
-    summary.each do |prod|
-      sum += prod[:price]
-    end
-    sum.round(2)
+    summary
+    .map{|prod| prod[:price]}
+    .reduce(:+)
+    .round(2)
   end
 
   def sum_with_vat

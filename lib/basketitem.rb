@@ -16,17 +16,15 @@ class BasketItem
   def change_quantity(num)
     raise ArgumentError unless num.is_a?(Integer)
 
-    new_quantity = @quantity + num
-
-    unless new_quantity < 0
-    ##(it's OK to set @quantity = 0 here, because Basket .summary method rejects such items)
-      @quantity = new_quantity
+    if @quantity + num >= 0
+    # it's OK to set @quantity = 0 here, because Basket#summary method rejects such items
+      @quantity = @quantity + num
     else
       raise WrongQuantityRequested
     end
   end
 
-  ##(the method below could potentially be used instead of current Basket .remove method)
+  # the method below could potentially be used instead of current Basket .remove method
   # def remove(product_id)
   #   product_is_a_basket_item = product.id == product_id
   #   raise NoSuchItem unless product_is_a_basket_item
