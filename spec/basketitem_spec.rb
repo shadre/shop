@@ -16,19 +16,19 @@ RSpec.describe BasketItem do
       expect(BasketItem.new(product: "basketballs_in_basket").quantity).to eql(1)
     end
 
-    it "returns argument error when quantity is not an integer" do
+    it "raises argument error when quantity is not an integer" do
       expect {
         BasketItem.new(product: "tennis_rackets_in_basket", price: 1.5)
       }.to raise_error(ArgumentError)
     end
 
-    it "returns argument error when product is not a string" do
+    it "raises argument error when product is not a string" do
       expect {
         BasketItem.new(product: 1, price: 100)
       }.to raise_error(ArgumentError)
     end
 
-    it "returns argument error when quantity is not a positive number" do
+    it "raises argument error when quantity is not a positive number" do
       expect {
         BasketItem.new(product: "BasketItem", price: -1)
       }.to raise_error(ArgumentError)

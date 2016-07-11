@@ -32,7 +32,7 @@ class Basket
 
   def sum
     summary
-    .map{|prod| prod[:price]}
+    .map{ |prod| prod[:price] }
     .reduce(:+)
     .round(2)
   end
