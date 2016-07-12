@@ -1,0 +1,8 @@
+<h2>Product list:</h2>
+<ul>
+<% products.each do |prod| %>
+  <li>
+    <a href="products/<%= prod.id %>"><%= prod.name %> | <%= '%.02f' % prod.price %> EUR</a>
+  </li>
+<% end %>
+</ul>
