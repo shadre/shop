@@ -1,34 +1,63 @@
 require_relative '../lib/basket.rb'
 
 RSpec.describe Basket do
+  let(:football) { Product.new(name: "Football", price: 79) }
+  let(:basketball) { Product.new(name: "Basketball", price: 60) }
+  let(:tennis_ball) { Product.new(name: "Tennis ball", price: 10) }
+  let(:footballs_in_basket) { BasketItem.new(product: football, quantity: 2) }
+  let(:basketballs_in_basket) { BasketItem.new(product: basketball, quantity: 1) }
+  let(:tennis_balls_in_basket) { BasketItem.new(product: tennis_ball, quantity: 3) }
+  let(:basket) { Basket.new([footballs_in_basket, basketballs_in_basket]) }
 
-  let(:p1) { Product.new(name: "Football", price: 79) }
-  let(:p2) { Product.new(name: "Basketball", price: 60) }
-
-  it "creates basket" do
-    expect Basket.new.is_a? Basket
+  describe "#sum" do
+    it "calculates products sum correctly" do
+      expect(basket.sum).to eq(218)
+    end
   end
 
-  it "doesn't delete product not existing in basket" do
-    bas = Basket.new
-      expect(bas.delete(0)).to eq nil
+  describe "#sum_with_vat" do
+    it "checks if sum with vat is correct" do
+      expect(basket.sum_with_vat).to eq(268.14)
+    end
   end
 
-  it "deletes product from basket" do
-    prod = Product.new(name: "Product", price: 50)
-    bas = Basket.new([prod])
-    expect(bas.delete(prod.id)).to eq prod 
+  describe "#add" do
+    it "adds selected item to basket" do
+      basket.add(tennis_balls_in_basket)
+      products_in_basket_names = basket.items.map do |item|
+        { name: item.product.name }
+      end
+      tennis_balls_found_in_basket = products_in_basket_names.select do |prod|
+        prod[:name] == "Tennis ball"
+      end
+      expect(tennis_balls_found_in_basket.empty?).to eq(false)
+    end
   end
 
-  it "calculates products sum correctly" do
-    bas = Basket.new([p1, p2])
-    expect(bas.sum).to eq 139
+  describe "#remove" do
+    context "when product does not exist in basket" do
+      it "raises ProductNotFound error" do
+        expect {
+          basket.remove(0)
+        }.to raise_error(Basket::ProductNotFound)
+      end
+    end
+
+    context "when product exists in basket" do
+      it "deletes product from basket" do
+        expect(basket.remove(football.id)).to eq(footballs_in_basket)
+      end
+    end
   end
 
+  describe "#summary" do
+    it "does not include products with zero quantity" do
+      basketballs_in_basket.change_quantity(-1)
+      expect(basket.summary.select { |prod| prod[:name] == "Basketball" }.empty?).to eq(true)
+    end
 
-  it "checks if sum with vat is correct" do
-    sum = Basket.new([p1, p2]).sum
-    sum_with_vat = Basket.new([p1, p2]).sum_with_vat
-    expect(sum * 1.23).to eq sum_with_vat
+    it "does include selected products" do
+      expect(basket.summary.select { |prod| prod[:name] == "Basketball" }.empty?).to eq(false)
+    end
   end
 end
