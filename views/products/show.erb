@@ -4,7 +4,7 @@ Price: <%= '%.02f' % product.price %> EUR<br />
 <form action="/basket" method="post">
   <input type ="hidden" name="product_id" value=<%= product.id %>>
   <input type="number" name="quantity" value="1">
-  <input type="submit" value="Add to my cart">
+  <input type="submit" value="Add to my basket">
 </form>
 <br />
 <a href="/">Go back</a>

@@ -1,37 +1,47 @@
 <h3>My cart</h3>
-<table border="1">
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>Product</th>
-      <th>Unit Price</th>
-      <th>Quantity</th>
-      <th>Total Price</th>
-      <th>Total Price with VAT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% items.each_with_index do |item, index| %>
+ <% unless items.empty? %>
+  <table border="1">
+    <thead>
       <tr>
-        <td><%= index+1 %>.</td>
-        <td><%= item[:product].name %></td>
-        <td><%= '%.02f' % item[:unit_price] %> EUR</td>
-        <td><%= item[:quantity] %></td>
-        <td><%= '%.02f' % item[:total_price] %> EUR</td>
-        <td><%= '%.02f' % item[:total_price_with_vat] %> EUR</td>
+        <th>Item</th>
+        <th>Product</th>
+        <th>Unit Price</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+        <th>Total Price with VAT</th>
       </tr>
-    <% end %>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>TOTAL:</td>
-      <td><strong><%= '%.02f' % items.map { |item| item[:total_price] }.reduce(:+) %> EUR</strong></td>
-      <td><strong><%= '%.02f' % items.map { |item| item[:total_price_with_vat] }.reduce(:+) %> EUR</strong></td>
-    </tr>
-  </tfoot>
-</table>
+    </thead>
+    <tbody>
+      <% items.each_with_index do |item, index| %>
+        <tr>
+          <td><%= index+1 %>.</td>
+          <td><%= item[:product].name %></td>
+          <td><%= '%.02f' % item[:unit_price] %> EUR</td>
+          <td><%= item[:quantity] %></td>
+          <td><%= '%.02f' % item[:total_price] %> EUR</td>
+          <td><%= '%.02f' % item[:total_price_with_vat] %> EUR</td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>TOTAL:</td>
+        <td>
+          <strong>
+            <%= '%.02f' % items.map { |item| item[:total_price] }.reduce(:+) %> EUR
+          </strong>
+        </td>
+        <td>
+          <strong>
+            <%= '%.02f' % items.map { |item| item[:total_price_with_vat] }.reduce(:+) %> EUR
+          </strong>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+  <% end %>
 <br />
 <a href="/">Go back</a>

@@ -1,12 +1,8 @@
 require "web_spec"
 
-RSpec.describe "GET /", type: :request do
+RSpec.describe "GET /basket", type: :request do
   before do
     do_request
-  end
-
-  it "returns 200 HTTP code" do
-    expect(last_response.status).to eql(200)
   end
 
   it "returns valid html content-type" do
@@ -14,7 +10,7 @@ RSpec.describe "GET /", type: :request do
   end
 
   it "shows correct page title" do
-    expect(last_response.body).to include("<title>Sports Shop</title>")
+    expect(last_response.body).to include("<title>Sports Shop")
   end
 
   it "generates a page with content" do
@@ -34,12 +30,8 @@ RSpec.describe "GET /", type: :request do
     expect(last_response.body).to include("<nav>")
   end
 
-  it "generates links to product details" do
-    expect(last_response.body).to match(/<a href=\"products\/\d*\">.*<\/a>/)
-  end
-
   private
   def do_request
-    get "/"
+    get "/basket"
   end
 end
