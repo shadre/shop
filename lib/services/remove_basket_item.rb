@@ -8,7 +8,6 @@ module Shop
       return unless basket_item
 
       reduce_basket_item_quantity(basket_item)
-      # maybe change quantity?
     end
 
     private

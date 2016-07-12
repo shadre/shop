@@ -8,7 +8,6 @@ module Shop
       return unless warehouse_item
 
       reduce_warehouse_item_quantity(warehouse_item)
-      # maybe change quantity?
     end
 
     private

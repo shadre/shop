@@ -15,6 +15,5 @@ module Shop
 
   WAREHOUSE_ITEMS = [
   ]
-
 end
 

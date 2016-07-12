@@ -2,7 +2,8 @@
 <table border="1">
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Item</th>
+      <th>Product</th>
       <th>Unit Price</th>
       <th>Quantity</th>
       <th>Total Price</th>
@@ -10,8 +11,9 @@
     </tr>
   </thead>
   <tbody>
-    <% items.each do |item| %>
+    <% items.each_with_index do |item, index| %>
       <tr>
+        <td><%= index+1 %>.</td>
         <td><%= item[:product].name %></td>
         <td><%= '%.02f' % item[:unit_price] %> EUR</td>
         <td><%= item[:quantity] %></td>
@@ -22,6 +24,7 @@
   </tbody>
   <tfoot>
     <tr>
+      <td></td>
       <td></td>
       <td></td>
       <td>TOTAL:</td>
