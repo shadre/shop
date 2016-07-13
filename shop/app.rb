@@ -44,7 +44,7 @@ module Shop
     post "/basket" do
       begin
         CreateBasketItem.new(params).call
-        redirect "/"
+        redirect "/basket"
       rescue KeyError
         halt 422
       end
