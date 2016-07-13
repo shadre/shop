@@ -1,9 +1,7 @@
-require "web_spec"
-
 RSpec.describe "GET /products/:id", type: :request do
   context "when product with given id does not exist" do
     before do
-      do_request(0)
+      do_request(id: 0)
     end
 
     it "shows information about not existing page" do
@@ -17,7 +15,7 @@ RSpec.describe "GET /products/:id", type: :request do
 
   context "when product with given id exists" do
     before do
-      do_request(1)
+      do_request(id: 1)
     end
 
     it "shows price of the product in correct format" do
@@ -25,7 +23,7 @@ RSpec.describe "GET /products/:id", type: :request do
     end
 
     it "shows an \"Add to my basket\" button " do
-      expect(last_response.body).to include("<input type=\"submit\" value=\"Add to my basket\">")
+      expect(last_response.body).to include("type=\"submit\" value=\"Add to my basket\">")
     end
 
     it "returns valid html content-type" do
@@ -46,7 +44,7 @@ RSpec.describe "GET /products/:id", type: :request do
     end
 
     it "generates page footer" do
-      expect(last_response.body).to include("<footer>")
+      expect(last_response.body).to include("<footer")
     end
 
     it "generates navigation menu" do
@@ -55,7 +53,7 @@ RSpec.describe "GET /products/:id", type: :request do
   end
 
   private
-  def do_request(id)
+  def do_request(id:)
     get "products/#{id}"
   end
 end

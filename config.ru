@@ -1,5 +1,5 @@
 require "bundler/setup"
 
-require_relative "./shop_app"
+require_relative "./app"
 
 run Shop::App.new

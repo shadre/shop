@@ -1,6 +1,5 @@
 module Shop
-
-  PRODUCTS = [
+  Products_to_seed = [
     Product.new(name: "Football", price: 79.44),
     Product.new(name: "Basketball", price: 60),
     Product.new(name: "Squash racket type A", price: 150),
@@ -9,11 +8,4 @@ module Shop
     Product.new(name: "Sports bag", price: 145),
     Product.new(name: "Tennis racket", price: 199)
   ]
-
-  BASKET_ITEMS = [
-  ]
-
-  WAREHOUSE_ITEMS = [
-  ]
 end
-

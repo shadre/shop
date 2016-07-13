@@ -1,0 +1,55 @@
+/* header */
+
+.logo {
+  float: center;
+  margin-right: 10px;
+  font-size: 2em;
+  color: #2C4E77;
+  text-transform: uppercase;
+  letter-spacing: -1.2px;
+  padding-top: 9px;
+  font-weight: bold;
+}
+
+.logo:hover {
+  color: #2C4E77;
+  text-decoration: none;
+}
+
+/*.main_menu {
+  float: left;
+  margin-right: 10px;
+  font-size: 1em;
+  color: #fff;
+}*/
+
+/* footer */
+
+footerz {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #777;
+}
+
+footer a {
+  color: #555;
+}
+
+footer a:hover {
+  color: #222;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 15px;
+}

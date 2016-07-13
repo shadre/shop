@@ -1,7 +1,7 @@
 <h2>Product list:</h2>
-<ul>
+<ul class="list-group">
 <% products.each do |prod| %>
-  <li>
+  <li class="list-group-item">
     <a href="products/<%= prod.id %>"><%= prod.name %> | <%= '%.02f' % prod.price %> EUR</a>
   </li>
 <% end %>

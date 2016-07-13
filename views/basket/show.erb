@@ -1,9 +1,9 @@
 <h3>My cart</h3>
  <% unless items.empty? %>
-  <table border="1">
+  <table class="table table-condensed">
     <thead>
       <tr>
-        <th>Item</th>
+        <th>#</th>
         <th>Product</th>
         <th>Unit Price</th>
         <th>Quantity</th>
@@ -13,7 +13,7 @@
     </thead>
     <tbody>
       <% items.each_with_index do |item, index| %>
-        <tr>
+        <tr >
           <td><%= index+1 %>.</td>
           <td><%= item[:product].name %></td>
           <td><%= '%.02f' % item[:unit_price] %> EUR</td>
@@ -30,18 +30,14 @@
         <td></td>
         <td>TOTAL:</td>
         <td>
-          <strong>
-            <%= '%.02f' % items.map { |item| item[:total_price] }.reduce(:+) %> EUR
-          </strong>
+          <%= '%.02f' % items.map { |item| item[:total_price] }.reduce(:+) %> EUR
         </td>
         <td>
-          <strong>
-            <%= '%.02f' % items.map { |item| item[:total_price_with_vat] }.reduce(:+) %> EUR
-          </strong>
+          <%= '%.02f' % items.map { |item| item[:total_price_with_vat] }.reduce(:+) %> EUR
         </td>
       </tr>
     </tfoot>
   </table>
   <% end %>
 <br />
-<a href="/">Go back</a>
+<a class="btn btn-default btn-lg" href="/" role="button">Go back</a>

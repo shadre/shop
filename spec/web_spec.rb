@@ -1,7 +1,7 @@
 require "spec_helper"
 require "rack/test"
 
-require_relative "../shop_app"
+require_relative "../app"
 
 module AppHelper
   def app

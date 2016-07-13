@@ -1,5 +1,3 @@
-require "web_spec"
-
 RSpec.describe "GET /basket", type: :request do
   before do
     do_request
@@ -23,7 +21,7 @@ RSpec.describe "GET /basket", type: :request do
   end
 
   it "generates page footer" do
-    expect(last_response.body).to include("<footer>")
+    expect(last_response.body).to include("<footer")
   end
 
   it "generates navigation menu" do

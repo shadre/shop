@@ -1,11 +1,23 @@
+# This file will be moved to /shop/ directory later on.
+# I had some issues with changing a root in Sinatra when trying to move it.
+# So for now I'm leaving it here and will change it later.
+
 require "bundler/setup"
 require "sinatra/base"
 require "sinatra/reloader"
 
-Dir["./lib/**/*.rb"].each { |ruby_file| require ruby_file }
-require "./db/seeds.rb"
+Dir["./lib/**/*.rb"].each { |path| require path }
+require_relative "./db/seeds.rb"
 
 module Shop
+  PRODUCTS = []
+  BASKET_ITEMS = []
+  WAREHOUSE_ITEMS = []
+
+  Products_to_seed.each do |product|
+    PRODUCTS << product
+  end
+
   class App < Sinatra::Base
     configure :development do
       register Sinatra::Reloader

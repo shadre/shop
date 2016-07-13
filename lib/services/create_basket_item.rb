@@ -1,6 +1,5 @@
 module Shop
   class CreateBasketItem
-
     def initialize(params)
       @product_id = params.fetch("product_id").to_i
       @quantity = params.fetch("quantity").to_i
