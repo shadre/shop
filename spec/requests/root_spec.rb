@@ -33,7 +33,7 @@ RSpec.describe "GET /", type: :request do
   end
 
   it "generates links to product details" do
-    expect(last_response.body).to match(/<a href=\"products\/\d*\">.*<\/a>/)
+    expect(last_response.body).to match(/<a href=\"products\/\d*\".*>.*<\/a>/)
   end
 
   private

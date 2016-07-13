@@ -1,24 +1,26 @@
-# This file will be moved to /shop/ directory later on.
-# I had some issues with changing a root in Sinatra when trying to move it.
-# So for now I'm leaving it here and will change it later.
-
 require "bundler/setup"
 require "sinatra/base"
 require "sinatra/reloader"
 
-Dir["./lib/**/*.rb"].each { |path| require path }
-require_relative "./db/seeds.rb"
+Dir["../lib/**/*.rb"].each { |path| require path }
+Dir["./lib/**/*.rb"].each { |path| require path } # needed for RSpec to work
+require_relative "../db/seeds.rb"
 
 module Shop
+  # pseudo database tables
   PRODUCTS = []
   BASKET_ITEMS = []
   WAREHOUSE_ITEMS = []
 
+  # pseudo database seeding
   Products_to_seed.each do |product|
     PRODUCTS << product
   end
 
   class App < Sinatra::Base
+    set :root, File.join(File.dirname(__FILE__), '..')
+    set :views, Proc.new { File.join(root, "views") }
+
     configure :development do
       register Sinatra::Reloader
     end

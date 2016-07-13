@@ -1,8 +1,16 @@
-<h2>Product list:</h2>
-<ul class="list-group">
-<% products.each do |prod| %>
-  <li class="list-group-item">
-    <a href="products/<%= prod.id %>"><%= prod.name %> | <%= '%.02f' % prod.price %> EUR</a>
-  </li>
-<% end %>
-</ul>
+<div class="row text-center">
+  <% products.each do |prod| %>
+    <div class="col-md-3 col-sm-6 hero-feature">
+      <div class="thumbnail">
+        <img src="http://placehold.it/800x500" alt="">
+          <div class="caption">
+            <h3><%= prod.name %></h3>
+            <p><%= '%.02f' % prod.price %> EUR</p>
+            <p>
+              <a href="products/<%= prod.id %>" class="btn btn-primary">Buy Now!</a>
+            </p>
+          </div>
+      </div>
+    </div>
+  <% end %>
+</div>
