@@ -5,7 +5,7 @@
 <form action="/basket" method="post">
   <div class="col-xs-3">
     <input type ="hidden" name="product_id" value=<%= product.id %>>
-    <input class="form-control" type="number" name="quantity" value="1">
+    <input class="form-control" type="number" name="quantity" min="1" value="1">
     <input class="btn btn-default" type="submit" value="Add to my basket">
   </div>
 </form>

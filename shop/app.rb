@@ -20,6 +20,7 @@ module Shop
   class App < Sinatra::Base
     set :root, File.join(File.dirname(__FILE__), '..')
     set :views, Proc.new { File.join(root, "views") }
+    set :method_override, true
 
     configure :development do
       register Sinatra::Reloader
@@ -50,8 +51,17 @@ module Shop
       end
     end
 
+    put "/basket/update" do
+      ChangeBasketItemQuantity.new(params).call
+      redirect "/basket"
+    end
+
     not_found do
-      "This site does not exist! :("
+      erb :"static/not_found"
+    end
+
+    get "/about" do
+      erb :"static/about"
     end
 
     error do

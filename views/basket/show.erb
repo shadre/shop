@@ -7,19 +7,37 @@
         <th>Product</th>
         <th>Unit Price</th>
         <th>Quantity</th>
+        <th>Change Quantity</th>
         <th>Total Price</th>
         <th>Total Price with VAT</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <% items.each_with_index do |item, index| %>
-        <tr >
+        <tr>
           <td><%= index+1 %>.</td>
           <td><%= item[:product].name %></td>
           <td><%= '%.02f' % item[:unit_price] %> EUR</td>
           <td><%= item[:quantity] %></td>
+          <td>
+            <form action="/basket/update" method="post" class="form-inline">
+              <input type="hidden" name="_method" value="put">
+              <input type="hidden" name="product_id" value="<%= item[:product].id %>">
+              <input type="number" name="new_quantity" min="0" value="<%= item[:quantity] %>">
+              <input class="btn btn-default" type="submit" value="Change">
+            </form>
+          </td>
           <td><%= '%.02f' % item[:total_price] %> EUR</td>
           <td><%= '%.02f' % item[:total_price_with_vat] %> EUR</td>
+          <td>
+            <form action="/basket/update" method="post" class="form-inline">
+              <input type="hidden" name="_method" value="put">
+              <input type="hidden" name="product_id" value="<%= item[:product].id %>">
+              <input type="hidden" name="new_quantity" value="0">
+              <input class="btn btn-default" type="submit" value="Remove item">
+            </form>
+          </td>
         </tr>
       <% end %>
     </tbody>
@@ -28,16 +46,21 @@
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
         <td>TOTAL:</td>
         <td>
-          <%= '%.02f' % items.map { |item| item[:total_price] }.reduce(:+) %> EUR
+          <strong>
+            <%= '%.02f' % items.map { |item| item[:total_price] }.reduce(:+) %> EUR
+          </strong>
         </td>
         <td>
-          <%= '%.02f' % items.map { |item| item[:total_price_with_vat] }.reduce(:+) %> EUR
+          <strong>
+            <%= '%.02f' % items.map { |item| item[:total_price_with_vat] }.reduce(:+) %> EUR
+          </strong>
         </td>
+        <td></td>
       </tr>
     </tfoot>
   </table>
   <% end %>
-<br />
 <a class="btn btn-default btn-lg" href="/" role="button">Go back</a>
