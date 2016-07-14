@@ -1,7 +1,5 @@
 module Shop
   class FetchBasketItems
-  attr_reader :product_id #, :quantity
-  attr_accessor :quantity
     def call
       BASKET_ITEMS.map do |item|
         {

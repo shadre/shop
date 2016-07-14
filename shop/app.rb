@@ -57,7 +57,11 @@ module Shop
     end
 
     not_found do
-      "This site does not exist! :("
+      erb :"static/not_found"
+    end
+
+    get "/about" do
+      erb :"static/about"
     end
 
     error do
