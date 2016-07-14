@@ -2,8 +2,10 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-group :test do 
-  gem "rspec"
-end
+gem "sinatra"
+gem "sinatra-contrib"
 
-# gem "rails"
+group :test do
+  gem "rspec"
+  gem "rack-test"
+end
