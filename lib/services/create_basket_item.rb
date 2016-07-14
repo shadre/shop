@@ -1,6 +1,6 @@
 module Shop
   class CreateBasketItem
-    attr_reader :product_id #, :quantity
+    attr_reader :product_id
     attr_accessor :quantity
 
     def initialize(params)

@@ -20,6 +20,7 @@ module Shop
   class App < Sinatra::Base
     set :root, File.join(File.dirname(__FILE__), '..')
     set :views, Proc.new { File.join(root, "views") }
+    set :method_override, true
 
     configure :development do
       register Sinatra::Reloader
@@ -48,6 +49,11 @@ module Shop
       rescue KeyError
         halt 422
       end
+    end
+
+    put "/basket/update" do
+      ChangeBasketItemQuantity.new(params).call
+      redirect "/basket"
     end
 
     not_found do

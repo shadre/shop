@@ -5,7 +5,7 @@ module Shop
     def call(id)
       basket_item = FetchBasketItems.new.call(id)
 
-      reduce_basket_item_quantity(basket_item) unless basket_item
+      reduce_basket_item_quantity(basket_item) unless !basket_item
     end
 
     private
