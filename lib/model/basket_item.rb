@@ -1,6 +1,7 @@
 module Shop
   class BasketItem
-    attr_reader :product_id, :quantity
+    attr_reader :product_id #, :quantity
+    attr_accessor :quantity
 
     ProductNotFound = Class.new(StandardError)
     WrongQuantityRequested = Class.new(StandardError)
