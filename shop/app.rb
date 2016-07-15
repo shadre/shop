@@ -10,11 +10,15 @@ module Shop
   # pseudo database tables
   PRODUCTS = []
   BASKET_ITEMS = []
-  WAREHOUSE_ITEMS = []
+  STOCK_ITEMS = []
 
   # pseudo database seeding
   Products_to_seed.each do |product|
     PRODUCTS << product
+  end
+
+  Stock_items_to_seed.each do |item|
+    STOCK_ITEMS << item
   end
 
   class App < Sinatra::Base
@@ -33,8 +37,9 @@ module Shop
 
     get "/products/:id" do |id|
       product = FetchProduct.new.call(id)
+      stock_item = FetchStockItem.new.call(id)
       halt 404 unless product
-      erb :"products/show", locals: { product: product }
+      erb :"products/show", locals: { product: product, stock_item: stock_item }
     end
 
     get "/basket" do
@@ -42,12 +47,12 @@ module Shop
       erb :"basket/show", locals: { items: basket_items }
     end
 
-    post "/basket" do
+    post "/basket/new" do
       begin
         CreateBasketItem.new(params).call
         redirect "/basket"
-      rescue KeyError
-        halt 422
+      rescue ArgumentError
+        erb :"static/outofstock"
       end
     end
 

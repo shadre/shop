@@ -1,8 +1,9 @@
 <div class="container">
   <h3><%= product.name %></h3>
   <p>Price: <%= '%.02f' % product.price %> EUR</p>
+  <p>Quantity available: <%= stock_item.level %></p>
 </div>
-<form action="/basket" method="post">
+<form action="/basket/new" method="post">
   <div class="col-xs-3">
     <input type ="hidden" name="product_id" value=<%= product.id %>>
     <input class="form-control" type="number" name="quantity" min="1" value="1">
