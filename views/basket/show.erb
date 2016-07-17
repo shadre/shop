@@ -42,24 +42,20 @@
       <% end %>
     </tbody>
     <tfoot>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>TOTAL:</td>
-        <td>
-          <strong>
-            <%= '%.02f' % items.map { |item| item[:total_price] }.reduce(:+) %> EUR
-          </strong>
-        </td>
-        <td>
-          <strong>
-            <%= '%.02f' % items.map { |item| item[:total_price_with_vat] }.reduce(:+) %> EUR
-          </strong>
-        </td>
-        <td></td>
-      </tr>
+        <tr>
+          <td colspan="5" align="right">TOTAL:</td>
+          <td>
+            <strong>
+              <%= '%.02f' % sums[:basket_total] %> EUR
+            </strong>
+          </td>
+          <td>
+            <strong>
+              <%= '%.02f' % sums[:basket_total_with_vat] %> EUR
+            </strong>
+          </td>
+          <td></td>
+        </tr>
     </tfoot>
   </table>
   <% end %>

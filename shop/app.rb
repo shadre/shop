@@ -44,7 +44,8 @@ module Shop
 
     get "/basket" do
       basket_items = FetchBasketItems.new.call
-      erb :"basket/show", locals: { items: basket_items }
+      basket_sum = CalculateBasketSum.new.call
+      erb :"basket/show", locals: { items: basket_items, sums: basket_sum }
     end
 
     post "/basket/new" do

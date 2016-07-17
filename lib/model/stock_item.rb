@@ -7,8 +7,7 @@ module Shop
       @product_id = product_id
       @level = level
 
-      raise ArgumentError unless level.is_a?(Integer)
-      raise ArgumentError unless level > 0
+      raise ArgumentError unless level.is_a?(Integer) && level > 0
     end
   end
 end

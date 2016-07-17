@@ -11,8 +11,7 @@ module Shop
       @product_id = product_id
       @quantity = quantity
 
-      raise ArgumentError unless quantity.is_a?(Integer)
-      raise ArgumentError unless quantity > 0
+      raise ArgumentError unless quantity.is_a?(Integer) && quantity > 0
     end
 
     def fetch_product
@@ -20,16 +19,15 @@ module Shop
     end
 
     def unit_price
-      product = fetch_product
-      product.price
+      fetch_product.price
     end
 
     def total_price
-      unit_price * quantity
+      (unit_price * quantity).round(2)
     end
 
     def total_price_with_vat
-      total_price * 1.23
+      (total_price * 1.23).round(2)
     end
   end
 end
