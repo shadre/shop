@@ -1,4 +1,4 @@
-RSpec.describe "POST /basket", type: :request do
+RSpec.describe "POST /basket/new", type: :request do
 
   context "when parameters are invalid" do
     let(:invalid_params) { { foo: "bar" } }
@@ -7,14 +7,14 @@ RSpec.describe "POST /basket", type: :request do
       do_request(invalid_params)
     end
 
-    it "returns 422 HTTP status code" do
+    it "returns 500 HTTP status code" do
       do_request
-      expect(last_response.status).to eq(422)
+      expect(last_response.status).to eq(500)
     end
   end
 
   context "when parameters are valid" do
-    let(:valid_params) { {product_id: 1, quantity: 10 } }
+    let(:valid_params) { {product_id: 1, quantity: 1 } }
 
     before do
       do_request(valid_params)
@@ -23,11 +23,6 @@ RSpec.describe "POST /basket", type: :request do
     it "redirects to basket" do
       follow_redirect!
       expect(last_request.url). to include("/basket")
-    end
-
-    it "returns 200 HTTP status code after redirect" do
-      follow_redirect!
-      expect(last_response.status).to eql(200)
     end
   end
 
@@ -39,7 +34,7 @@ RSpec.describe "POST /basket", type: :request do
 
   private
   def do_request(params= {})
-    post "/basket", params
+    post "/basket/new", params
   end
 
 end
